@@ -1,0 +1,51 @@
+#   ______                    _ __     
+#  /_  __/__  _________ ___  (_) /____ 
+#   / / / _ \/ ___/ __ `__ \/ / __/ _ \
+#  / / /  __/ /  / / / / / / / /_/  __/
+# /_/  \___/_/  /_/ /_/ /_/_/\__/\___/ 
+
+# TERMITE CONFIG (~/.config/termite/config)
+# ---------------------------
+
+[options]
+font = Hack Nerd Font Regular 10
+allow_bold = true
+bold_is_bright = true
+
+clickable_url = true
+
+# Options -> block, underline, ibeam
+cursor_shape = ibeam
+# Options -> system, on, off
+cursor_blink = system
+
+scrollback_lines = 1000
+# Options -> off, left, right
+scrollbar = off
+
+[colors]
+background = #327B8E
+foreground = #EDEBEC
+background = rgba(50, 123, 142, 0.5)
+
+highlight = #454C61
+
+# Normal Colors
+color0 = #EDEBEC
+color1 = #A2CAD9
+color2 = #5E9DAE
+color3 = #327B8E
+color4 = #013C48
+color5 = #011D25
+color6 = #050A0C
+color7 = #EDEBEC
+
+# Bright Colors
+color8 = #EDEBEC
+color9 = #A2CAD9
+color10 = #5E9DAE
+color11 = #327B8E
+color12 = #013C48
+color13 = #011D25
+color14 = #050A0C
+color15 = #EDEBEC

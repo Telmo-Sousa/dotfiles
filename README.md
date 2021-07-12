@@ -21,8 +21,8 @@ My awesome dotfiles.
 
 # Screnshots
 
-![Alt text](https://github.com/Telmo-Sousa/Screenshots/blob/main/Mountain.png "mountain") 
-![Alt text](https://github.com/Telmo-Sousa/Screenshots/blob/main/MountainRofi.png "mountain rofi") 
+![Alt text](https://github.com/Telmo-Sousa/Screenshots/blob/main/NewMountain.png "mountain") 
+![Alt text](https://github.com/Telmo-Sousa/Screenshots/blob/main/NewMountainRofi.png "mountain rofi") 
 ![Alt text](https://github.com/Telmo-Sousa/Screenshots/blob/main/Bit.png "bit")
 ![Alt text](https://github.com/Telmo-Sousa/Screenshots/blob/main/BitRofi.png "bit rofi")
 

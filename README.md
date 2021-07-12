@@ -16,6 +16,8 @@ My awesome dotfiles.
 
 [zathura](https://wiki.archlinux.org/title/Zathura) 
 
+[picom](https://aur.archlinux.org/packages/picom-jonaburg-git)
+
 
 # Screnshots
 

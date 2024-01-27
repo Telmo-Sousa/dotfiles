@@ -4,23 +4,22 @@
 --  / ___ | |/ |/ /  __(__  ) /_/ / / / / / /  __/
 -- /_/  |_|__/|__/\___/____/\____/_/ /_/ /_/\___/ 
 
--- AWESOME CONFIG (~/.config/awesome/rc.lua)
 -------------------------------------------------------
-
--- Hide tmux keybinds from the hotkeys popup
-package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
 
 -- Importing libraries
 local gears = require('gears')
 local awful = require('awful')
 require('awful.autofocus')
-local bling = require("bling")
-local lain = require("lain")
+local bling = require('bling')
+local lain = require('lain')
 local beautiful = require('beautiful')
 local keys = require('keys')
+local wibox = require("wibox")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
+
 
 -- Loading the theme
-theme_path = string.format('~/.config/awesome/themes/Mountain/theme.lua', os.getenv('HOME'), 'Mountain')
+theme_path = string.format('~/.config/awesome/themes/Gruvbox/theme.lua', os.getenv('HOME'), 'Gruvbox')
 beautiful.init(theme_path)
 
 -- Set the wallpaper
@@ -41,39 +40,21 @@ for s = 1, screen.count() do
 	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
 end
 
+
 -- Layouts
 awful.layout.layouts = {
     awful.layout.suit.fair,
+    bling.layout.horizontal,
     awful.layout.suit.floating,
     awful.layout.suit.max,
     awful.layout.suit.magnifier,
     awful.layout.suit.tile,
     bling.layout.centered,
     bling.layout.equalarea,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    --awful.layout.suit.corner.nw,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
 }
 
 awful.screen.connect_for_each_screen(function(s)
-    local tagTable = {'code', 'www', 'music', 'read', 'misc'}
-
-    --[[ Uncomment this if not using custom tag names (no. of tags will be derived from `tags` variable set in keys.lua)
-    -- Also uncomment `keys.tags = tags` line in the Variables section in keys.lua!
-    local tagTable = {}
-    for i = 1, keys.tags do
-        table.insert(tagTable, tostring(i))
-    end
-    ]]
-
+    local tagTable = {'1','2','3','4','5','6','7','8','9'}
     awful.tag(tagTable, s, awful.layout.layouts[1])
 end)
 
@@ -89,22 +70,6 @@ awful.rules.rules = {
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
                    }
     },
-        
-    -- Floating exceptions
-    { rule_any = {
-            class = {'Lxappearance', 'qt5ct'},
-            name = {'Event Tester'}, --xev
-            role = {'pop-up', 'GtkFileChooserDialog'},
-            type = {'dialog'}
-        },
-        properties = {floating = true}
-    },
-    -- Don't put border color on polybar
-    { rule_any = {
-            class = {'Polybar'}
-        },
-        properties = {border_color = nil}
-    }
 }
 
 -- Enable sloppy focus
@@ -117,6 +82,10 @@ client.connect_signal('focus', function(c) c.border_color = beautiful.border_foc
 client.connect_signal('unfocus', function(c) c.border_color = beautiful.border_normal end)
 
 -- Autostart
-awful.spawn.with_shell("picom -b")
-awful.spawn.with_shell("lxpolkit")
-awful.spawn.with_shell("lxsession")
+awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
+-- awful.spawn.with_shell('picom --experimental-backends --backend glx --xrender-sync-fence')
+awful.spawn.with_shell('lxpolkit')
+awful.spawn.with_shell('/home/telmo/.xprofile')
+awful.spawn.with_shell('/home/telmo/.xinitrc')
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+-- awful.spawn.with_shell('/home/telmo/ASF/ArchiSteamFarm')

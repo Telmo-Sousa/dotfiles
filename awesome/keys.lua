@@ -1,20 +1,24 @@
--- Awesome keybindings
+--     ___                                        
+--    /   |_      _____  _________  ________  ___ 
+--   / /| | | /| / / _ \/ ___/ __ \/ __  __ \/ _ \
+--  / ___ | |/ |/ /  __(__  ) /_/ / / / / / /  __/
+-- /_/  |_|__/|__/\___/____/\____/_/ /_/ /_/\___/ 
+
+-------------------------------------------------------
 
 -- Importing libraries
 local gears = require('gears')
 local awful = require('awful')
 local lain = require('lain')
-local hotkeys_popup = require('awful.hotkeys_popup')
-                                    require('awful.hotkeys_popup.keys')
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- Variables
 local keys = {}
 
 metakey = 'Mod4'
-tags = 5
--- keys.tags = tags     --Uncomment this if not using custom tag names
-terminal = 'termite'
-editor = 'kwrite'
+tags = 9
+terminal = 'alacritty'
+editor = 'vim'
 editor_launch = editor
 
 -- Keybindings
@@ -23,21 +27,22 @@ keys.globalkeys = gears.table.join(
     -- Awesome
     awful.key({metakey, 'Control'}, 'r', awesome.restart,
               {description = 'Reload awesome', group = 'Awesome'}),
-    awful.key({metakey}, 's', hotkeys_popup.show_help,
-              {description='Keybindings', group='Awesome'}),
     awful.key({metakey}, 'Tab', function () awful.layout.inc(1) end,
               {description = 'Next layout', group = 'Awesome'}),
     awful.key({metakey, 'Shift'}, 'Tab', function () awful.layout.inc(-1) end,
               {description = 'Previous layout', group = 'Awesome'}),
     awful.key({metakey}, 'Escape', awful.tag.history.restore,
-              {description='Return to last tag', group='Tags'}),
+              {description='Return to last tag', group='Custom Tags'}),
     awful.key({metakey, 'Shift'   }, 'q', awesome.quit,
-              {description = "Quit awesome", group = "Awesome"}),
-    awful.key({metakey}, 'p', function() os.execute("gnome-screenshot") end,
-              {description = "Screenshot", group = "Awesome"}),
-    
-    
-
+              {description = 'Quit awesome', group = 'Awesome'}),
+    awful.key({metakey}, 's', function() os.execute('flameshot full -p /home/telmo/Screenshots') end,
+              {description = 'Screenshot', group = 'Awesome'}),
+    awful.key({metakey}, 'g', function() os.execute('flameshot gui') end,
+              {description = 'Screenshot', group = 'Awesome'}),
+    awful.key({metakey}, 'l', function() os.execute('betterlockscreen -l blur') end,
+              {description = 'Lockscreen', group = 'Awesome'}),
+    awful.key({ metakey  }, 'h', function() hotkeys_popup.show_help(nil, awful.screen.focused()) end,
+            { description='Show Hotkeys', group='Awesome'  }),
 
     -- Window management
     awful.key({'Mod1',}, 'Tab', function() awful.client.focus.byidx(1) end,
@@ -46,33 +51,36 @@ keys.globalkeys = gears.table.join(
               {description = 'Increase master width factor', group = 'Window Management'}),
     awful.key({metakey}, 'Left', function () awful.tag.incmwfact(-0.03) end,
               {description = 'Decrease master width factor', group = 'Window Management'}),
-    awful.key({metakey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
-              {description = "increment useless gaps", group = "Window Management"}),
-    awful.key({metakey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end,
-              {description = "decrement useless gaps", group = "Window Management"}),
+    awful.key({metakey, 'Control' }, '+', function () lain.util.useless_gaps_resize(1) end,
+              {description = 'increment useless gaps', group = 'Window Management'}),
+    awful.key({metakey, 'Control' }, '-', function () lain.util.useless_gaps_resize(-1) end,
+              {description = 'decrement useless gaps', group = 'Window Management'}),
     
-
-
     -- Applications
     awful.key({metakey}, 'Return', function() awful.util.spawn(terminal) end,
-              {description='Termite', group='Applications'}),
+              {description='Alacritty', group='Applications'}),
     awful.key({metakey}, 'k', function() awful.util.spawn(editor_launch) end,
-              {description='Kwrite', group='Applications'}),
+              {description='Vim', group='Applications'}),
     awful.key({metakey}, 'r', function() awful.util.spawn('rofi -show run') end,
               {description='Rofi', group='Applications'}),
-    awful.key({metakey}, 'f', function() awful.util.spawn('firefox') end,
+    awful.key({metakey}, 'w', function() awful.util.spawn('rofi -show window') end,
+              {description='Rofi', group='Applications'}),  
+    awful.key({metakey}, 'd', function() awful.util.spawn('rofi -show drun') end,
+              {description='Rofi', group='Applications'}),                  
+    awful.key({metakey}, 'f', function() awful.util.spawn('firefox-developer-edition') end,
               {description='Firefox', group='Applications'}),
     awful.key({metakey}, 'n', function() awful.util.spawn('nautilus') end,
-              {description='Nautilus', group='Applications'})
-
+              {description='Nautilus', group='Applications'}),
+    awful.key({metakey}, 'v', function() awful.util.spawn('pavucontrol') end,
+              {description='Pavucontrol', group='Applications'})
 )
 
 keys.clientkeys = gears.table.join(
-    awful.key({metakey,"Shift"}, 'c', function(c) c:kill() end,
+    awful.key({metakey}, 'q', function(c) c:kill() end,
               {description = 'Close', group = 'Window Management'}),
-    awful.key({metakey}, 'space', function(c) c.fullscreen = not c.fullscreen; c:raise() end,
+    awful.key({metakey,},'space', function(c) c.fullscreen = not c.fullscreen; c:raise() end,
               {description = 'Toggle Fullscreen', group = 'Window Management'}),
-    awful.key({metakey, 'Shift'}, 'space', function() awful.client.floating.toggle() end,
+    awful.key({metakey, 'shift'}, 'space', function() awful.client.floating.toggle() end,
               {description = 'Toggle Floating', group = 'Window Management'})
 )
 
@@ -100,7 +108,7 @@ for i = 1, tags do
                            tag:view_only()
                         end
                   end,
-                  {description = 'View tag #'..i, group = 'Tags'}),
+                  {description = 'View tag #'..i, group = 'Change Tags'}),
                                        
                     
         -- Move window to tag
@@ -113,37 +121,15 @@ for i = 1, tags do
                           end
                      end
                   end,
-                  {description = 'Move focused window to tag #'..i, group = 'Tags'}),
-                                       
-                                        
-                                       
- --        awful.key({metakey,}, 'm',
- --       function (c)
- --           c.maximized = not c.maximized
-  --          c:raise()
-  --      end ,
-  --      {description = "(un)maximize", group = "client"}),
-  --  awful.key({ metakey, "altkey" }, "m",
- --       function (c)
- --           c.maximized_vertical = not c.maximized_vertical
- --           c:raise()
- --       end ,
- --       {description = "(un)maximize vertically", group = "client"}),
---    awful.key({ metakey, "tab"   }, "m",
---        function (c)
---            c.maximized_horizontal = not c.maximized_horizontal
---            c:raise()
---        end ,
- --       {description = "(un)maximize horizontally", group = "client"}),
-                                       
+                  {description = 'Move focused window to tag #'..i, group = 'Custom Tags'}),
                                        
        -- ALSA volume control
-    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -D pulse sset Master 2%+", false) end),
-              --{description = "increase volume", group = "Volume"}),
-    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -D pulse sset Master 2%-", false) end),
-              --{description = "Decrease volume", group = "Volume"}),
-    awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -D pulse sset Master toggle", false) end),
-              --{description = "Mute", group = "Volume"}),
+    awful.key({}, 'XF86AudioRaiseVolume', function () awful.util.spawn('amixer -D pulse sset Master 2%+', false) end),
+              --{description = 'increase volume', group = 'Volume'}),
+    awful.key({}, 'XF86AudioLowerVolume', function () awful.util.spawn('amixer -D pulse sset Master 2%-', false) end),
+              --{description = 'Decrease volume', group = 'Volume'}),
+    awful.key({}, 'XF86AudioMute', function () awful.util.spawn('amixer -D pulse sset Master toggle', false) end),
+              --{description = 'Mute', group = 'Volume'}),
 
         -- Toggle tag display.
         awful.key({metakey, 'Control'}, '#'..i + 9,
@@ -154,7 +140,7 @@ for i = 1, tags do
                     awful.tag.viewtoggle(tag)
                 end
             end,
-            {description = 'Toggle tag #' .. i, group = 'Tags'}))
+            {description = 'Toggle tag #' .. i, group = 'Custom Tags'}))
 end
 
 -- Set globalkeys

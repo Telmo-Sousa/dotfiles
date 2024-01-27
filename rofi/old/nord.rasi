@@ -1,0 +1,76 @@
+configuration {
+  modi: "window,run,drun";
+  width: 50;
+  lines: 10;
+  columns: 2;
+  font: "Hack Nerd Font Regular 10";
+  terminal: "alacritty";
+  disable-history: false;
+  sidebar-mode: true;
+  tokenize: true;
+  m: "-5";
+  line-margin: 4;
+  line-padding: 2;
+  separator-style: "none";
+  hide-scrollbar: true;
+  window-format: "{w} {c}";
+  display-: "window";
+  display-drun: "apps";
+  display-run: "run";
+}
+
+* {
+  /*bg: #0F1212;*/
+  bg: #2e3440;
+  fg: #d8dee9;
+  accent: #4c566a;
+  button: #434c5e;
+  
+  background-color: @bg;
+  text-color: @fg;
+}
+
+window {
+  padding: 30px;
+  border-radius: 7px;
+}
+
+prompt, entry {
+  text-color: @fg;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+
+entry {
+    margin: 0 0 10px 10px;
+}
+
+prompt {
+    background-color: @accent;
+    text-color: @bg;
+    margin: 0 0 10px 0;
+    padding: 10px 30px 10px 30px;
+}
+
+element {
+  border-radius: 7px;
+  padding: 10px 30px;
+}
+
+element selected {
+  background-color: @fg;
+  text-color: @bg;
+}
+
+button {
+    border-radius: 7px;
+    padding: 10px;
+    margin: 10px 50px 0 50px;
+}
+
+button selected {
+  background-color: #434c5e;
+  text-color: @fg;
+  padding: 10px;
+}

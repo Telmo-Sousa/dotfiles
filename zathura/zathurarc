@@ -1,60 +1,58 @@
-#  _____         __  __                    
-# /__  /  ______/ /_/ /_  __  _____________
-#   / /  / __  / __/ __ \/ / / / ___/ __  /
-#  / /__/ /_/ / /_/ / / / /_/ / /  / /_/ / 
-# /____/\__,_/\__/_/ /_/\__,_/_/   \__,_/  
-#                                                          
-# ZATHURA CONFIG (~/.config/zathura/zathurarc)
-# --------------------------------------------------------------------------
+set window-title-basename "true"
+set selection-clipboard "clipboard"
 
-# GENERAL SETTINGS
-set statusbar-h-padding 0
-set statusbar-v-padding 0
-set page-padding 1
-map D toggle_page_mode # p to change page mode
-map R reload # R to reload document
-map r rotate # r to rotate document
-map c recolor # C to change theme
-set recolor true # Set custom colorscheme by default
+# Dracula color theme for Zathura
+# Swaps Foreground for Background to get a light version if the user prefers
 
-# ------------------------------------------------
-# COLORS
+#
+# Dracula color theme
+#
 
-# Tab completion colors
-set completion-group-bg         '#327B8E'
-set completion-group-fg         '#EDEBEC'
-set completion-bg               '#327B8E'
-set completion-fg               '#EDEBEC'
-set completion-highlight-bg     '#327B8E'
-set completion-highlight-fg     '#EDEBEC'
+set notification-error-bg       "#ff5555" # Red
+set notification-error-fg       "#f8f8f2" # Foreground
+set notification-warning-bg     "#ffb86c" # Orange
+set notification-warning-fg     "#44475a" # Selection
+set notification-bg             "#282a36" # Background
+set notification-fg             "#f8f8f2" # Foreground
 
-# Notification colors
-set notification-error-bg       '#013C48'
-set notification-error-fg       '#EDEBEC'
-set notification-warning-bg     '#013C48'
-set notification-warning-fg     '#EDEBEC'
-set notification-bg             '#013C48'
-set notification-fg             '#EDEBEC'
+set completion-bg               "#282a36" # Background
+set completion-fg               "#6272a4" # Comment
+set completion-group-bg         "#282a36" # Background
+set completion-group-fg         "#6272a4" # Comment
+set completion-highlight-bg     "#44475a" # Selection
+set completion-highlight-fg     "#f8f8f2" # Foreground
 
-# Index colors
-set index-bg                    '#327B8E'
-set index-fg                    '#EDEBEC'
-set index-active-bg             '#327B8E'
-set index-active-fg             '#EDEBEC'
+set index-bg                    "#282a36" # Background
+set index-fg                    "#f8f8f2" # Foreground
+set index-active-bg             "#44475a" # Current Line
+set index-active-fg             "#f8f8f2" # Foreground
 
-# Input Bar colors
-set inputbar-bg                 '#327B8E'
-set inputbar-fg                 '#EDEBEC'
+set inputbar-bg                 "#282a36" # Background
+set inputbar-fg                 "#f8f8f2" # Foreground
+set statusbar-bg                "#282a36" # Background
+set statusbar-fg                "#f8f8f2" # Foreground
 
-# Status Bar colors
-set statusbar-bg                '#327B8E'
-set statusbar-fg                '#EDEBEC'
+set highlight-color             "#ffb86c" # Orange
+set highlight-active-color      "#ff79c6" # Pink
 
-# Search-highlight colors
-set highlight-color             '#011D25'
-set highlight-active-color      '#050A0C'
+set default-bg                  "#282a36" # Background
+set default-fg                  "#f8f8f2" # Foreground
 
-# General colors
-set default-bg                  '#327B8E'
-set recolor-lightcolor          '#5E9DAE'
-set recolor-darkcolor           '#050A0C'
+set render-loading              true
+set render-loading-fg           "#282a36" # Background
+set render-loading-bg           "#f8f8f2" # Foreground
+
+#
+# Recolor mode settings
+#
+
+set recolor-lightcolor          "#282a36" # Background
+set recolor-darkcolor           "#f8f8f2" # Foreground
+
+#
+# Startup options
+#
+set adjust-open width
+set recolor true
+
+set font "Hack Nerd Font Regular 10"

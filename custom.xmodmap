@@ -1,0 +1,2 @@
+! Replaces my menu key with a less/greater key
+keycode 135 = less greater

@@ -1,22 +1,12 @@
---     ___                                        
---    /   |_      _____  _________  ________  ___ 
---   / /| | | /| / / _ \/ ___/ __ \/ __  __ \/ _ \
---  / ___ | |/ |/ /  __(__  ) /_/ / / / / / /  __/
--- /_/  |_|__/|__/\___/____/\____/_/ /_/ /_/\___/ 
-
--------------------------------------------------------
-
 -- Importing libraries
 local gears = require('gears')
 local awful = require('awful')
 require('awful.autofocus')
 local bling = require('bling')
-local lain = require('lain')
 local beautiful = require('beautiful')
 local keys = require('keys')
 local wibox = require("wibox")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-
 
 -- Loading the theme
 theme_path = string.format('~/.config/awesome/themes/Gruvbox/theme.lua', os.getenv('HOME'), 'Gruvbox')
@@ -39,8 +29,6 @@ screen.connect_signal('property::geometry', set_wallpaper)
 for s = 1, screen.count() do
 	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
 end
-
-
 -- Layouts
 awful.layout.layouts = {
     awful.layout.suit.fair,
@@ -77,15 +65,60 @@ client.connect_signal('mouse::enter', function(c)
     c:emit_signal('request::activate', 'mouse_enter', {raise = false})
 end)
 
+-- Create widgets
+local mylauncher = awful.widget.launcher({
+    image = beautiful.awesome_icon,
+    menu = mymainmenu
+})
+
+local mytaglist = awful.widget.taglist {
+    screen = awful.screen.focused(),  -- Use 'awful.screen.focused()' to get the current screen
+    filter = awful.widget.taglist.filter.all,
+    buttons = keys.taglist_buttons
+}
+
+local mypromptbox = awful.widget.prompt()
+
+local mytasklist = awful.widget.tasklist {
+    screen = awful.screen.focused(),  -- Use 'awful.screen.focused()' to get the current screen
+    filter = awful.widget.tasklist.filter.currenttags,
+    buttons = keys.tasklist_buttons,
+    style = {
+        font = beautiful.tasklist_font,
+    },
+}
+
+-- Create a text clock widget
+local clock_widget = wibox.widget.textclock()
+
+-- Create a wibox
+local mywibox = awful.wibar({ position = "top", screen = 1 })
+
+-- Add widgets to the wibox
+mywibox:setup {
+    layout = wibox.layout.align.horizontal,
+    { -- Left widgets
+        layout = wibox.layout.fixed.horizontal,
+        mylauncher,
+        mytaglist,
+        mypromptbox,
+    },
+    mytasklist, -- Middle widget
+    { -- Right widgets
+        layout = wibox.layout.fixed.horizontal,
+        wibox.widget.systray(),
+        clock_widget,
+    },
+}
+
 -- Colored borders
 client.connect_signal('focus', function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal('unfocus', function(c) c.border_color = beautiful.border_normal end)
 
 -- Autostart
 awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
--- awful.spawn.with_shell('picom --experimental-backends --backend glx --xrender-sync-fence')
 awful.spawn.with_shell('lxpolkit')
+awful.spawn.with_shell('lxqt-policykit')
 awful.spawn.with_shell('/home/telmo/.xprofile')
 awful.spawn.with_shell('/home/telmo/.xinitrc')
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
--- awful.spawn.with_shell('/home/telmo/ASF/ArchiSteamFarm')

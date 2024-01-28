@@ -43,6 +43,7 @@ keys.globalkeys = gears.table.join(
               {description = 'Lockscreen', group = 'Awesome'}),
     awful.key({ metakey  }, 'h', function() hotkeys_popup.show_help(nil, awful.screen.focused()) end,
             { description='Show Hotkeys', group='Awesome'  }),
+    
 
     -- Window management
     awful.key({'Mod1',}, 'Tab', function() awful.client.focus.byidx(1) end,

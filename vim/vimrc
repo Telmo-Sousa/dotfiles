@@ -1,0 +1,106 @@
+" Plugin manager setup (vim-plug)
+call plug#begin('~/.vim/plugged')
+  Plug 'sheerun/vim-polyglot'
+  Plug 'pearofducks/ansible-vim'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-commentary'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'alvan/vim-closetag'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'morhetz/gruvbox'
+  Plug 'preservim/nerdtree'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'rust-lang/rust.vim'
+call plug#end()
+
+" General settings
+set nocompatible
+filetype on
+filetype plugin on
+filetype indent on
+syntax enable
+set number
+set wildmenu
+set wildmode=list:longest
+
+" GitHub copilot settings
+let g:githubcopilot#enabled = 1
+
+" GitHub Copilot enable for markdown filetypes
+let g:copilot_filetypes = {'markdown': v:true}
+
+" Instant markdown settings
+let g:instant_markdown_theme = 'dark'
+
+" Rust specific configurations
+au FileType rust setlocal ts=4 sts=4 sw=4
+au FileType rust nnoremap <buffer> <Leader>r :Cargo run<CR>
+
+" CoC settings
+let g:coc_global_extensions = [
+      \ 'coc-snippets',
+      \ 'coc-pyright',
+      \ 'coc-json',
+      \ 'coc-tsserver',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-yaml',
+      \ 'coc-rls',  
+      \ 'coc-rust-analyzer',
+      \ ]
+
+
+" Key mappings for CoC
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <leader>rn <Plug>(coc-rename)
+
+" Additional configuration for CoC
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
+
+" NERDTree settings
+let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
+
+" Toggle NERDTree with Ctrl-f
+nmap <C-f> :NERDTreeToggle<CR>
+
+" Automatically open NERDTree on Vim startup
+au VimEnter * NERDTree
+
+" Automatically close NERDTree when it's the only window/tab
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Dracula theme settings
+" packadd! dracula
+" colorscheme dracula
+" let g:dracula_colorterm = 0
+
+" Gruvbox Configuration
+syntax enable
+set background=dark
+colorscheme gruvbox
+
+" Set encoding to UTF-8
+set encoding=UTF-8
+
+" NERDTree navigation shortcuts
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Use <S-Tab> for completion
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+

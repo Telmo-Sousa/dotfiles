@@ -1,0 +1,2 @@
+In case of issues with emojis:
+noto-fonts-emoji

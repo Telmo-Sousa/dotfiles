@@ -124,7 +124,7 @@ function create_context_menu()
 end
 
 -- Create a button that triggers the context menu
-local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/tux.png" })
+local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/menu.png" })
 local context_menu = nil  -- Variable to track the currently open menu
 
 context_menu_button:connect_signal("button::press", function(_, _, _, button)
@@ -144,7 +144,7 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
             fg_normal = beautiful.wibar_fg,
             border_color = beautiful.wibar_border_color,
             border_width = beautiful.wibar_border_width,
-            submenu_icon = "/home/telmo/.config/awesome/images/tux.png",
+            submenu_icon = "/home/telmo/.config/awesome/images/menu.png",
             height = 15,
             width = 75,
             font = beautiful.hotkeys_font,

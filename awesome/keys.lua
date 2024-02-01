@@ -38,13 +38,13 @@ keys.globalkeys = gears.table.join(
     awful.key({ metakey }, 's', function()
         local timestamp = os.date("%Y%m%d%H%M%S")
         local filename = '/home/telmo/Screenshots/screen_' .. timestamp .. '.png'
-    os.execute('import -window root ' .. filename) end,
-    { description = "Screenshot", group = 'Awesome' }),
-awful.key({ metakey }, 'g', function()
-    local timestamp = os.date("%Y%m%d%H%M%S")
-    local filename = '/home/telmo/Screenshots/region_' .. timestamp .. '.png'
-os.execute('import ' .. filename) end,
-{ description = "Screenshot", group = 'Awesome' }),
+        os.execute('import -window root ' .. filename) end,
+        { description = "Screenshot", group = 'Awesome' }),
+    awful.key({ metakey }, 'g', function()
+        local timestamp = os.date("%Y%m%d%H%M%S")
+        local filename = '/home/telmo/Screenshots/region_' .. timestamp .. '.png'
+        os.execute('import ' .. filename) end,
+        { description = "Screenshot", group = 'Awesome' }),
     awful.key({metakey}, 'l', function() os.execute('betterlockscreen -l blur') end,
         {description = 'Lockscreen', group = 'Awesome'}),
     awful.key({ metakey  }, 'h', function() hotkeys_popup.show_help(nil, awful.screen.focused()) end,

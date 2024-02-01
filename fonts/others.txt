@@ -1,2 +1,5 @@
 In case of issues with emojis:
 noto-fonts-emoji
+
+In case of issues with other languages:
+adobe-source-han-serif-cn-fonts adobe-source-han-serif-jp-fonts adobe-source-han-serif-kr-fonts adobe-source-han-serif-otc-fonts adobe-source-han-serif-tw-fonts

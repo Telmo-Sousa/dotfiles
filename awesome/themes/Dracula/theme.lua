@@ -55,6 +55,37 @@ theme.tasklist_bg_focus = "#282a36" -- color of tasklist
 theme.tasklist_fg_focus = "#f8f8f2" -- color of font
 theme.tasklist_disable_icon = true
 
+-- Dracula colors for notifications
+theme.notification_bg = "#282a36"
+theme.notification_fg = "#f8f8f2"
+theme.notification_border_color = "#6272a4"
+theme.notification_max_width = 200  
+theme.notification_max_height = 100
+
+function create_notification(title, text)
+    naughty.notify({
+        title = title,
+        text = text,
+        timeout = 5,
+        position = "top_right",
+        bg = theme.notification_bg,
+        fg = theme.notification_fg,
+        width = theme.notification_max_width,
+        height = theme.notification_max_height,
+        icon = nil,
+    })
+end
+
+-- Create context menu items with custom colors
+function create_context_menu_items()
+    return {
+        { "Lock", function() awful.spawn.with_shell("betterlockscreen -l blur") end, theme.wibar_fg, theme.wibar_bg },
+        { "Shutdown", function() awful.spawn.with_shell("poweroff") end, theme.wibar_fg, theme.wibar_bg },
+        { "Reboot", function() awful.spawn.with_shell("reboot") end, theme.wibar_fg, theme.wibar_bg },
+    }
+end
+
+
 -- Wallpaper
 theme.wallpaper = '~/.config/awesome/themes/Dracula/gentoo.png'
 

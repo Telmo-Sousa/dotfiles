@@ -10,7 +10,7 @@ local naughty = require("naughty")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- Loading the theme
-theme_path = string.format('~/.config/awesome/themes/Gruvbox/theme.lua', os.getenv('HOME'), 'Gruvbox')
+theme_path = string.format('~/.config/awesome/themes/Dracula/theme.lua', os.getenv('HOME'), 'Dracula')
 beautiful.init(theme_path)
 
 -- Set the wallpaper
@@ -124,7 +124,8 @@ function create_context_menu()
 end
 
 -- Create a button that triggers the context menu
-local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/menu.png" })
+--local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/menu.png" })
+local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/dracula.png" })
 local context_menu = nil  -- Variable to track the currently open menu
 
 context_menu_button:connect_signal("button::press", function(_, _, _, button)
@@ -144,12 +145,17 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
             fg_normal = beautiful.wibar_fg,
             border_color = beautiful.wibar_border_color,
             border_width = beautiful.wibar_border_width,
-            submenu_icon = "/home/telmo/.config/awesome/images/menu.png",
+           -- submenu_icon = "/home/telmo/.config/awesome/images/menu.png",
+            submenu_icon = "/home/telmo/.config/awesome/images/dracula.png",
             height = 15,
             width = 75,
             font = beautiful.hotkeys_font,
-            bg_focus = "#504945",
-            fg_focus = "#fb4934",
+           -- Gruvbox
+           -- bg_focus = "#504945",
+           -- fg_focus = "#fb4934",
+           -- Dracula colors for focused window
+            bg_focus = "#282a36",
+            fg_focus = "#ff79c6",
         }
 
         context_menu = awful.menu({
@@ -163,7 +169,7 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
 end)
 
 -- Create a wibox
-local mywibox = awful.wibar({ position = "top", screen = 1 })
+local mywibox = awful.wibar({ position = "bottom", screen = 1 })
 
 -- Add widgets to the wibox
 mywibox:setup {

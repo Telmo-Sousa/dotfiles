@@ -198,6 +198,7 @@ client.connect_signal('unfocus', function(c) c.border_color = beautiful.border_n
 -- Autostart
 awful.spawn.with_shell("picom --config ~/.config/picom/picom.conf")
 awful.spawn.with_shell('lxpolkit')
+awful.spawn.with_shell('lxsession')
 awful.spawn.with_shell('lxqt-policykit')
 awful.spawn.with_shell('/home/telmo/.xprofile')
 awful.spawn.with_shell('/home/telmo/.xinitrc')

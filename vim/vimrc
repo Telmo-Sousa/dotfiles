@@ -1,11 +1,12 @@
 " Plugin manager setup (vim-plug)
 call plug#begin('~/.vim/plugged')
+  Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'sheerun/vim-polyglot'
   Plug 'pearofducks/ansible-vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-commentary'
   Plug 'jiangmiao/auto-pairs'
-  Plug 'alvan/vim-closetag'
+"  Plug 'alvan/vim-closetag'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'pangloss/vim-javascript'
@@ -85,12 +86,17 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Dracula theme settings
 " packadd! dracula
 " colorscheme dracula
-" let g:dracula_colorterm = 0
+" let g:dracula_colorterm = 1
+syntax enable
+colorscheme dracula
+set termguicolors
+let g:dracula_colorterm = 0
+let g:dracula_italic = 0
 
 " Gruvbox Configuration
-syntax enable
-set background=dark
-colorscheme gruvbox
+" syntax enable
+" set background=dark
+" colorscheme gruvbox
 
 " Set encoding to UTF-8
 set encoding=UTF-8
@@ -103,4 +109,7 @@ map <C-l> <C-w>l
 
 " Use <S-Tab> for completion
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" Clipboard settings
+set clipboard=unnamedplus
 

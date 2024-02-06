@@ -74,9 +74,8 @@ naughty.notify({
     title = "AwesomeWM Started",
     text = "Welcome to AwesomeWM!",
     timeout = 5,
-    position = "top_right"
+    position = "top_right",
 })
-
 
 -- Create widgets
 local mylauncher = awful.widget.launcher({
@@ -124,7 +123,6 @@ function create_context_menu()
 end
 
 -- Create a button that triggers the context menu
---local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/menu.png" })
 local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/dracula.png" })
 local context_menu = nil  -- Variable to track the currently open menu
 
@@ -145,7 +143,6 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
             fg_normal = beautiful.wibar_fg,
             border_color = beautiful.wibar_border_color,
             border_width = beautiful.wibar_border_width,
-           -- submenu_icon = "/home/telmo/.config/awesome/images/menu.png",
             submenu_icon = "/home/telmo/.config/awesome/images/dracula.png",
             height = 15,
             width = 75,
@@ -153,9 +150,9 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
            -- Gruvbox
            -- bg_focus = "#504945",
            -- fg_focus = "#fb4934",
-           -- Dracula colors for focused window
-            bg_focus = "#282a36",
-            fg_focus = "#ff79c6",
+           -- Dracula colors 
+            bg_focus = "#BD93F9",
+            fg_focus = "#f8f8f2",
         }
 
         context_menu = awful.menu({
@@ -171,6 +168,14 @@ end)
 -- Create a wibox
 local mywibox = awful.wibar({ position = "bottom", screen = 1 })
 
+-- Set the desired offset values
+local x_offset = 0
+local y_offset = 7
+
+-- Set the position with offsets
+mywibox.x = x_offset
+mywibox.y = mywibox.screen.geometry.height - mywibox.height - y_offset 
+
 -- Add widgets to the wibox
 mywibox:setup {
     layout = wibox.layout.align.horizontal,
@@ -179,10 +184,10 @@ mywibox:setup {
         layout = wibox.layout.fixed.horizontal,
         mylauncher,
         mytaglist,
-        mypromptbox,
+        --mypromptbox,
     },
     -- this centers the tasklist
-    -- expand = "none", 
+    --expand = "none", 
     mytasklist, -- Middle widget
     { -- Right widgets
         layout = wibox.layout.fixed.horizontal,

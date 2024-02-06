@@ -3,7 +3,7 @@
 
 local theme = {}
 
-theme.font          = 'MonaspiceNe Nerd Font Mono 16'
+theme.font          = 'MonaspiceNe Nerd Font Mono 18'
 
 theme.bg_normal     = "#282a36"
 theme.bg_focus      = "#6272a4"
@@ -29,15 +29,20 @@ theme.hotkeys_opacity = '0.9'
 theme.hotkeys_border_width = 1
 theme.hotkeys_border_color = '#6272a4'
 theme.hotkeys_modifiers_fg = '#bd93f9'
-theme.hotkeys_label_fg = '#44475a'
+theme.hotkeys_label_fg = '#f8f8f2'
 theme.hotkeys_font = 'MonaspiceNe Nerd Font Mono 14'
 theme.hotkeys_description_font = 'MonaspiceNe Nerd Font Mono 14'
 theme.hotkeys_group_margin = 5
+
+-- Wibar
 theme.wibar_bg = "#282a36"
 theme.wibar_fg = "#f8f8f2"
-theme.wibar_border_color = "#44475a"
-theme.wibar_border_width = 0
+theme.wibar_border_color = "#6272a4"
+theme.wibar_border_width = 1
 theme.wibar_height = 25
+
+-- Systray
+theme.systray_icon_spacing = 2
 
 -- Apply the Dracula colors to the wibar widgets as needed
 theme.taglist_bg_empty = theme.wibar_bg
@@ -53,7 +58,7 @@ theme.tasklist_bg_normal = theme.wibar_bg
 theme.tasklist_fg_normal = "#6272a4"
 theme.tasklist_bg_focus = "#282a36" -- color of tasklist
 theme.tasklist_fg_focus = "#f8f8f2" -- color of font
-theme.tasklist_disable_icon = true
+theme.tasklist_disable_icon = true -- disable/enable icons tasklist
 
 -- Dracula colors for notifications
 theme.notification_bg = "#282a36"
@@ -85,12 +90,10 @@ function create_context_menu_items()
     }
 end
 
-
 -- Wallpaper
-theme.wallpaper = '~/.config/awesome/themes/Dracula/gentoo.png'
+theme.wallpaper = '~/.config/awesome/themes/Dracula/mac.jpg'
 
 return theme
-
 
 -- Background 	    #282a36 	 	Background Color
 -- Current Line 	#44475a 	 	Current Line Color

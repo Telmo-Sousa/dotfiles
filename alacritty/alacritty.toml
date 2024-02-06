@@ -61,15 +61,19 @@ size = 11
 
 [font.bold]
 family = "MonaspiceNe Nerd Font Mono"
+style = "Bold"
 
 [font.bold_italic]
 family = "MonaspiceNe Nerd Font Mono"
+style = "Bold Italic"
 
 [font.italic]
 family = "MonaspiceNe Nerd Font Mono"
+style = "Italic"
 
 [font.normal]
 family = "MonaspiceNe Nerd Font Mono"
+style = "Regular"
 
 [window.padding]
 x = 1

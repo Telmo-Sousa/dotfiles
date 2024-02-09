@@ -7,7 +7,6 @@ local beautiful = require('beautiful')
 local keys = require('keys')
 local wibox = require("wibox")
 local naughty = require("naughty")
-local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- Loading the theme
 theme_path = string.format('~/.config/awesome/themes/Dracula/theme.lua', os.getenv('HOME'), 'Dracula')
@@ -59,6 +58,7 @@ awful.rules.rules = {
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
                    }
     },
+
 }
 
 -- Enable sloppy focus
@@ -83,6 +83,19 @@ local mylauncher = awful.widget.launcher({
     menu = mymainmenu
 })
 
+-- taglist with Dracula colors and adjusted powerline shape thickness
+--local mytaglist = awful.widget.taglist {
+--    screen = awful.screen.focused(),
+--    filter = awful.widget.taglist.filter.all,
+--    style = {
+--        shape = function(cr, width, height)
+--            gears.shape.powerline(cr, width, height, 8)  -- thickness 
+--        end
+--    },
+--    buttons = keys.taglist_buttons
+--}
+
+-- Taglist
 local mytaglist = awful.widget.taglist {
     screen = awful.screen.focused(),  -- Use 'awful.screen.focused()' to get the current screen
     filter = awful.widget.taglist.filter.all,
@@ -97,17 +110,14 @@ local mytasklist = awful.widget.tasklist {
     buttons = keys.tasklist_buttons,
     style = {
         font = beautiful.tasklist_font,
-        --  font = "MonaspiceNe Nerd Font Mono 15",
     },
 }
 
 -- Create a text clock widget
 local clock_widget = wibox.widget.textclock()
---clock_widget.font = "MonaspiceNe Nerd Font Mono 15" 
 
 -- Function to create the context menu items (you need to define this function)
 function create_context_menu_items()
-    -- Implement this function to return the menu items
     return {
         { "Lock", function() awful.spawn.with_shell("betterlockscreen -l blur") end },
         { "Shutdown", function() awful.spawn.with_shell("poweroff") end },
@@ -118,17 +128,16 @@ end
 -- Function to create the context menu
 function create_context_menu()
     return awful.menu({
-        items = create_context_menu_items(),  -- Use the function to get menu items
+        items = create_context_menu_items(),
     })
 end
 
 -- Create a button that triggers the context menu
 local context_menu_button = awful.widget.button({ image = "/home/telmo/.config/awesome/images/dracula.png" })
-local context_menu = nil  -- Variable to track the currently open menu
+local context_menu = nil
 
 context_menu_button:connect_signal("button::press", function(_, _, _, button)
     if button == 3 then  -- Right click (M2 button)
-        -- Close the existing menu if it's open
         if context_menu then
             context_menu:hide()
             context_menu = nil
@@ -137,7 +146,6 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
 
         local menu_items = create_context_menu_items()
 
-        -- Menu theme (assuming beautiful object is properly defined)
         local menu_theme = {
             bg_normal = beautiful.wibar_bg,
             fg_normal = beautiful.wibar_fg,
@@ -147,10 +155,6 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
             height = 15,
             width = 75,
             font = beautiful.hotkeys_font,
-           -- Gruvbox
-           -- bg_focus = "#504945",
-           -- fg_focus = "#fb4934",
-           -- Dracula colors 
             bg_focus = "#BD93F9",
             fg_focus = "#f8f8f2",
         }
@@ -179,19 +183,15 @@ mywibox.y = mywibox.screen.geometry.height - mywibox.height - y_offset
 -- Add widgets to the wibox
 mywibox:setup {
     layout = wibox.layout.align.horizontal,
-    { -- Left widgets
+    {
         context_menu_button,
         layout = wibox.layout.fixed.horizontal,
         mylauncher,
         mytaglist,
-        --mypromptbox,
     },
-    -- this centers the tasklist
-    --expand = "none", 
-    mytasklist, -- Middle widget
-    { -- Right widgets
+    mytasklist,
+    {
         layout = wibox.layout.fixed.horizontal,
-        --wibox.widget.systray(),
         clock_widget,
     },
 }

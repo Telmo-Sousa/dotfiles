@@ -1,6 +1,10 @@
 -- Dracula
 ------------------
 
+local gears = require("gears")
+local awful = require("awful")
+local naughty = require("naughty")
+
 local theme = {}
 
 theme.font          = 'MonaspiceNe Nerd Font Mono 18'
@@ -30,8 +34,8 @@ theme.hotkeys_border_width = 1
 theme.hotkeys_border_color = '#6272a4'
 theme.hotkeys_modifiers_fg = '#bd93f9'
 theme.hotkeys_label_fg = '#f8f8f2'
-theme.hotkeys_font = 'MonaspiceNe Nerd Font Mono 14'
-theme.hotkeys_description_font = 'MonaspiceNe Nerd Font Mono 14'
+theme.hotkeys_font = 'MonaspiceNe Nerd Font Mono 16'
+theme.hotkeys_description_font = 'MonaspiceNe Nerd Font Mono 15'
 theme.hotkeys_group_margin = 5
 
 -- Wibar
@@ -53,12 +57,20 @@ theme.taglist_bg_urgent = theme.wibar_bg
 theme.taglist_fg_urgent = "#ff5555"
 theme.taglist_bg_focus = "#44475a"
 theme.taglist_fg_focus = "#f8f8f2"
+theme.taglist_spacing = 0
 
+-- Taglist shape
+--theme.taglist_shape = function(cr, width, height)
+--    gears.shape.rounded_rect(cr, width, height, 5)
+--end
+
+-- Tasklist
 theme.tasklist_bg_normal = theme.wibar_bg
 theme.tasklist_fg_normal = "#6272a4"
 theme.tasklist_bg_focus = "#282a36" -- color of tasklist
 theme.tasklist_fg_focus = "#f8f8f2" -- color of font
-theme.tasklist_disable_icon = true -- disable/enable icons tasklist
+theme.tasklist_disable_task_name = false -- Disable/enable the tasklist client titles
+theme.tasklist_disable_icon = true -- disable/enable the tasklist icons
 
 -- Dracula colors for notifications
 theme.notification_bg = "#282a36"

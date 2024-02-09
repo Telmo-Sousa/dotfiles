@@ -10,7 +10,14 @@
 local gears = require('gears')
 local awful = require('awful')
 local lain = require('lain')
+local naughty = require('naughty')
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+require("awful.hotkeys_popup.keys")
+
+-- Define PulseAudio volume control commands
+local volume_up_command = "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+local volume_down_command = "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+local volume_mute_command = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
 -- Variables
 local keys = {}
@@ -63,10 +70,26 @@ keys.globalkeys = gears.table.join(
     awful.key({metakey, 'Control' }, '-', function () lain.util.useless_gaps_resize(-1) end,
         {description = 'decrement useless gaps', group = 'Window Management'}),
 
+    -- Volume control
+    awful.key({metakey}, '+', function ()
+        awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%", false)
+        naughty.notify({ text = 'Volume Increased', timeout = 1 })
+        end, {description = 'Increase volume', group = 'Volume'}),
+    awful.key({metakey}, '-', function ()
+        awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)
+        naughty.notify({ text = 'Volume Decreased', timeout = 1 })
+        end, {description = 'Decrease volume', group = 'Volume'}),
+    awful.key({metakey}, '0', function ()
+        awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle", false)
+        naughty.notify({ text = 'Volume Muted/Unmuted', timeout = 1 })
+        end, {description = 'Toggle Mute', group = 'Volume'}),
+
     -- Applications
     awful.key({metakey}, 'Return', function() awful.util.spawn(terminal) end,
         {description='Alacritty', group='Applications'}),
-    awful.key({metakey}, 'k', function() awful.util.spawn(editor_launch) end,
+--    awful.key({metakey}, 'k', function() awful.util.spawn(editor_launch) end,
+--        {description='Vim', group='Applications'}),
+    awful.key({metakey}, 'k', function()awful.util.spawn(terminal .. ' -e vim') end,
         {description='Vim', group='Applications'}),
     awful.key({metakey}, 'r', function() awful.util.spawn('rofi -show run') end,
         {description='Rofi', group='Applications'}),
@@ -90,6 +113,7 @@ keys.clientkeys = gears.table.join(
     awful.key({metakey, 'shift'}, 'space', function() awful.client.floating.toggle() end,
         {description = 'Toggle Floating', group = 'Window Management'})
     )
+
 
 -- Mouse controls
 keys.clientbuttons = gears.table.join(
@@ -129,14 +153,6 @@ for i = 1, tags do
                 end
             end,
             {description = 'Move focused window to tag #'..i, group = 'Custom Tags'}),
-
-        -- ALSA volume control
-        awful.key({}, 'XF86AudioRaiseVolume', function () awful.util.spawn('amixer -D pulse sset Master 2%+', false) end),
-        --{description = 'increase volume', group = 'Volume'}),
-        awful.key({}, 'XF86AudioLowerVolume', function () awful.util.spawn('amixer -D pulse sset Master 2%-', false) end),
-        --{description = 'Decrease volume', group = 'Volume'}),
-        awful.key({}, 'XF86AudioMute', function () awful.util.spawn('amixer -D pulse sset Master toggle', false) end),
-        --{description = 'Mute', group = 'Volume'}),
 
         -- Toggle tag display.
         awful.key({metakey, 'Control'}, '#'..i + 9,

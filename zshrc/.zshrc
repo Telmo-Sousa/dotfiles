@@ -130,4 +130,5 @@ RPROMPT='%F{yellow}%(1v.%1v.%1v.)%F{red}%T%f'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Apply custom xmodmap settings
 xmodmap /home/telmo/custom.xmodmap
-
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8

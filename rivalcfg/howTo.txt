@@ -1,0 +1,3 @@
+If you want to set the sensitivity to 400 DPI, the polling rate to 1000 Hz, and the LED color to #BD93F9, you can use the following command:
+
+rivalcfg -s "400" -p "1000" -c "#BD93F9"

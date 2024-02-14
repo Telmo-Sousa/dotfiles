@@ -1,0 +1,9 @@
+{
+  "default": {
+    "sensitivity": "400",
+    "polling_rate": "1000",
+    "color": "#BD93F9",
+    "buttons_mapping": "buttons(button1=button1; button2=button2; button3=button3; button4=button4; button5=button5; button6=dpi; scrollup=scrollup; scrolldown=scrolldown; layout=qwerty)",
+    "default_lighting": "rainbow"
+  }
+}

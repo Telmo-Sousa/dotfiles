@@ -1,0 +1,80 @@
+[colors.bright]
+black = "0x282a36"
+blue = "0x6272a4"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xff5555"
+white = "0xf8f8f2"
+yellow = "0xf1fa8c"
+
+[colors.cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[colors.dim]
+black = "0x282a36"
+blue = "0x6272a4"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xff5555"
+white = "0xf8f8f2"
+yellow = "0xf1fa8c"
+
+[colors.line_indicator]
+background = "None"
+foreground = "None"
+
+[colors.normal]
+black = "0x282a36"
+blue = "0x6272a4"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xff5555"
+white = "0xf8f8f2"
+yellow = "0xf1fa8c"
+
+[colors.primary]
+background = "0x282a36"
+foreground = "0xf8f8f2"
+
+[colors.search.focused_match]
+background = "0xff79c6"
+foreground = "0x282a36"
+
+[colors.search.matches]
+background = "0x50fa7b"
+foreground = "0x282a36"
+
+[colors.selection]
+background = "0x44475a"
+text = "CellForeground"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[font]
+size = 11
+
+[font.bold]
+family = "MonaspiceNe Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "MonaspiceNe Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "MonaspiceNe Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "MonaspiceNe Nerd Font Mono"
+style = "Regular"
+
+[window.padding]
+x = 1
+y = 0

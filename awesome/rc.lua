@@ -104,12 +104,86 @@ local mytaglist = awful.widget.taglist {
 
 local mypromptbox = awful.widget.prompt()
 
+-- Previous tasklist without icons
+--local mytasklist = awful.widget.tasklist {
+--    screen = awful.screen.focused(),
+--    filter = awful.widget.tasklist.filter.currenttags,
+--    buttons = keys.tasklist_buttons,
+--    style = {
+--        font = beautiful.tasklist_font,
+--    },
+----}
+
 local mytasklist = awful.widget.tasklist {
     screen = awful.screen.focused(),
     filter = awful.widget.tasklist.filter.currenttags,
     buttons = keys.tasklist_buttons,
     style = {
         font = beautiful.tasklist_font,
+    },
+    widget_template = {
+        {
+            {
+                {
+                    {
+                        {
+                            id = 'icon_role',
+                            widget = wibox.widget.imagebox,
+                        },
+                        margins = 2,
+                        widget = wibox.container.margin,
+                    },
+                    {
+                        id = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left = 10,
+                right = 10,
+                widget = wibox.container.margin,
+            },
+            widget = wibox.container.background,
+        },
+        create_callback = function(self, c, index, objects)
+            local icon_path = nil
+
+            -- Check the class of the client and set the icon accordingly
+            if c.class == "firefoxdeveloperedition" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/firefox-developer-icon.png"
+            elseif c.class == "Alacritty" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/alacritty.png"
+            elseif c.class == "discord" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/discord.png"
+            elseif c.class == "zoom" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/zoom.png"
+            elseif c.class == "Spotify" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/spotify.png"
+            elseif c.class == "pavucontrol" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/pavucontrol.png"
+            elseif c.class == "Lxappearance" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/lxappearance.png"
+            elseif c.class == "nvidia-settings" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/nvidia.png"
+            elseif c.class == "Steam" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/steam.png"
+            elseif c.class == "nemo" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/nemo.png"
+             elseif c.class == "qbittorrent" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/qbittorrent.png"
+            elseif c.class == "mpv" then
+                icon_path = "/home/telmo/.config/awesome/icons/png/mpv.png"
+            end
+
+            -- Set the custom icon if available
+            if icon_path then
+                self:get_children_by_id('icon_role')[1].image = gears.surface(icon_path)
+            else
+                -- Use default icon for other clients
+                self:get_children_by_id('icon_role')[1].image = c.icon
+            end
+        end,
+        layout = wibox.layout.align.vertical,
     },
 }
 
@@ -169,6 +243,27 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
     end
 end)
 
+
+-- Function to update the volume widget
+local function update_volume(widget)
+    awful.spawn.easy_async("sh -c 'pactl list sinks | grep \"^[[:space:]]Volume:\" | head -n 1 | sed -e \"s,.* \\([0-9][0-9]*\\)%.*,\\1,\"'", function(stdout)
+        -- Extract the volume percentage from the pactl output
+        local volume = tonumber(stdout or "0")
+
+        -- Update the widget text
+        widget.text = volume .. "%"
+    end)
+end
+
+-- Volume widget
+local volume_widget = wibox.widget.textbox()
+update_volume(volume_widget)
+
+-- Update the volume widget every 0.1 seconds
+awful.widget.watch("sh -c 'pactl list sinks | grep \"^[[:space:]]Volume:\" | head -n 1 | sed -e \"s,.* \\([0-9][0-9]*\\)%.*,\\1,\"'", 0.1, function(widget, stdout)
+    update_volume(widget)
+end, volume_widget)
+
 -- Create a wibox
 local mywibox = awful.wibar({ position = "bottom", screen = 1 })
 
@@ -189,9 +284,11 @@ mywibox:setup {
         mylauncher,
         mytaglist,
     },
+    expand = "none",
     mytasklist,
     {
         layout = wibox.layout.fixed.horizontal,
+        volume_widget,
         clock_widget,
     },
 }

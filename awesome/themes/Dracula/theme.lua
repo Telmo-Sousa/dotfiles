@@ -69,7 +69,7 @@ theme.tasklist_bg_normal = theme.wibar_bg
 theme.tasklist_fg_normal = "#6272a4"
 theme.tasklist_bg_focus = "#282a36" -- color of tasklist
 theme.tasklist_fg_focus = "#f8f8f2" -- color of font
-theme.tasklist_disable_task_name = false -- Disable/enable the tasklist client titles
+theme.tasklist_disable_task_name = true -- Disable/enable the tasklist client titles
 theme.tasklist_disable_icon = true -- disable/enable the tasklist icons
 
 -- Dracula colors for notifications

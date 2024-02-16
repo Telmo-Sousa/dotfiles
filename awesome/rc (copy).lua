@@ -67,8 +67,7 @@ client.connect_signal('mouse::enter', function(c)
 end)
 
 -- Set the default icon size for notifications
---naughty.config.defaults['icon_size'] = 50
-naughty.config.defaults['position'] = 'top_right'
+naughty.config.defaults['icon_size'] = 50
 
 -- Sample notification on startup
 naughty.notify({
@@ -84,6 +83,18 @@ local mylauncher = awful.widget.launcher({
     menu = mymainmenu
 })
 
+-- taglist with Dracula colors and adjusted powerline shape thickness
+--local mytaglist = awful.widget.taglist {
+--    screen = awful.screen.focused(),
+--    filter = awful.widget.taglist.filter.all,
+--    style = {
+--        shape = function(cr, width, height)
+--            gears.shape.powerline(cr, width, height, 8)  -- thickness 
+--        end
+--    },
+--    buttons = keys.taglist_buttons
+--}
+
 -- Taglist
 local mytaglist = awful.widget.taglist {
     screen = awful.screen.focused(),  -- Use 'awful.screen.focused()' to get the current screen
@@ -92,6 +103,16 @@ local mytaglist = awful.widget.taglist {
 }
 
 local mypromptbox = awful.widget.prompt()
+
+-- Previous tasklist without icons
+--local mytasklist = awful.widget.tasklist {
+--    screen = awful.screen.focused(),
+--    filter = awful.widget.tasklist.filter.currenttags,
+--    buttons = keys.tasklist_buttons,
+--    style = {
+--        font = beautiful.tasklist_font,
+--    },
+----}
 
 local icon_paths = {
     firefoxdeveloperedition = "/home/telmo/.config/awesome/icons/png/firefox-developer-icon.png",
@@ -197,8 +218,8 @@ context_menu_button:connect_signal("button::press", function(_, _, _, button)
             height = 15,
             width = 75,
             font = beautiful.hotkeys_font,
-            bg_focus = "#44475A",
-            fg_focus = "#BD93F9",
+            bg_focus = "#BD93F9",
+            fg_focus = "#f8f8f2",
         }
 
         context_menu = awful.menu({

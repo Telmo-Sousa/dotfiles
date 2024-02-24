@@ -54,8 +54,7 @@ let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-html',
       \ 'coc-css',
-      \ 'coc-yaml',
-      \ 'coc-rls',  
+      \ 'coc-yaml', 
       \ 'coc-rust-analyzer',
       \ ]
 

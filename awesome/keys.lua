@@ -44,14 +44,16 @@ keys.globalkeys = gears.table.join(
         {description = 'Quit awesome', group = 'Awesome'}),
     awful.key({ metakey }, 's', function()
         local timestamp = os.date("%Y%m%d%H%M%S")
-        local filename = '/home/telmo/Screenshots/screen_' .. timestamp .. '.png'
-        os.execute('import -window root ' .. filename) end,
-        { description = "Screenshot", group = 'Awesome' }),
-    awful.key({ metakey }, 'g', function()
-        local timestamp = os.date("%Y%m%d%H%M%S")
-        local filename = '/home/telmo/Screenshots/region_' .. timestamp .. '.png'
-        os.execute('import ' .. filename) end,
-        { description = "Screenshot", group = 'Awesome' }),
+        local filename = '/home/telmo/Pictures/Screenshots/screen_' .. timestamp .. '.png'
+        os.execute('import -window root ' .. filename)
+    naughty.notify({ title = "System Notifications", text = "Screenshot captured", timeout = 1}) end,
+    { description = "Screenshot", group = 'Awesome' }),
+awful.key({ metakey }, 'g', function()
+    local timestamp = os.date("%Y%m%d%H%M%S")
+    local filename = '/home/telmo/Pictures/Screenshots/region_' .. timestamp .. '.png'
+    os.execute('import ' .. filename)
+naughty.notify({ title = "System Notifications", text = "Screenshot captured", timeout = 1}) end,
+{ description = "Screenshot", group = 'Awesome' }),
     awful.key({metakey}, 'l', function() os.execute('betterlockscreen -l blur') end,
         {description = 'Lockscreen', group = 'Awesome'}),
     awful.key({ metakey  }, 'h', function() hotkeys_popup.show_help(nil, awful.screen.focused()) end,
@@ -73,37 +75,37 @@ keys.globalkeys = gears.table.join(
     -- Volume control
     awful.key({metakey}, '+', function ()
         awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%", false)
-        naughty.notify({ text = 'Volume Increased', timeout = 1 })
-        end, {description = 'Increase volume', group = 'Volume'}),
-    awful.key({metakey}, '-', function ()
-        awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)
-        naughty.notify({ text = 'Volume Decreased', timeout = 1 })
-        end, {description = 'Decrease volume', group = 'Volume'}),
+        naughty.notify({ title = "System Notifications", text = 'Volume Increased', timeout = 1 })
+    end, {description = 'Increase volume', group = 'Volume'}),
+awful.key({metakey}, '-', function ()
+    awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)
+    naughty.notify({ title = "System Notifications", text = 'Volume Decreased', timeout = 1 })
+end, {description = 'Decrease volume', group = 'Volume'}),
     awful.key({metakey}, '0', function ()
         awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle", false)
-        naughty.notify({ text = 'Volume Muted/Unmuted', timeout = 1 })
-        end, {description = 'Toggle Mute', group = 'Volume'}),
+        naughty.notify({ title = "System Notifications", text = 'Volume Muted/Unmuted', timeout = 1 })
+    end, {description = 'Toggle Mute', group = 'Volume'}),
 
-    -- Applications
-    awful.key({metakey}, 'Return', function() awful.util.spawn(terminal) end,
-        {description='Alacritty', group='Applications'}),
+-- Applications
+awful.key({metakey}, 'Return', function() awful.util.spawn(terminal) end,
+    {description='Alacritty', group='Applications'}),
 --    awful.key({metakey}, 'k', function() awful.util.spawn(editor_launch) end,
 --        {description='Vim', group='Applications'}),
-    awful.key({metakey}, 'k', function()awful.util.spawn(terminal .. ' -e vim') end,
-        {description='Vim', group='Applications'}),
-    awful.key({metakey}, 'r', function() awful.util.spawn('rofi -show run') end,
-        {description='Rofi', group='Applications'}),
-    awful.key({metakey}, 'w', function() awful.util.spawn('rofi -show window') end,
-        {description='Rofi', group='Applications'}),  
-    awful.key({metakey}, 'd', function() awful.util.spawn('rofi -show drun') end,
-        {description='Rofi', group='Applications'}),                  
-    awful.key({metakey}, 'f', function() awful.util.spawn('firefox-developer-edition') end,
-        {description='Firefox', group='Applications'}),
-    awful.key({metakey}, 'n', function() awful.util.spawn('nemo') end,
-        {description='Nemo', group='Applications'}),
-    awful.key({metakey}, 'v', function() awful.util.spawn('pavucontrol') end,
-        {description='Pavucontrol', group='Applications'})
-    )
+awful.key({metakey}, 'k', function()awful.util.spawn(terminal .. ' -e vim') end,
+    {description='Vim', group='Applications'}),
+awful.key({metakey}, 'r', function() awful.util.spawn('rofi -show run') end,
+    {description='Rofi', group='Applications'}),
+awful.key({metakey}, 'w', function() awful.util.spawn('rofi -show window') end,
+    {description='Rofi', group='Applications'}),  
+awful.key({metakey}, 'd', function() awful.util.spawn('rofi -show drun') end,
+    {description='Rofi', group='Applications'}),                  
+awful.key({metakey}, 'f', function() awful.util.spawn('firefox-developer-edition') end,
+    {description='Firefox', group='Applications'}),
+awful.key({metakey}, 'n', function() awful.util.spawn('nemo') end,
+    {description='Nemo', group='Applications'}),
+awful.key({metakey}, 'v', function() awful.util.spawn('pavucontrol') end,
+    {description='Pavucontrol', group='Applications'})
+)
 
 keys.clientkeys = gears.table.join(
     awful.key({metakey}, 'q', function(c) c:kill() end,

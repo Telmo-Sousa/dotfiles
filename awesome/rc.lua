@@ -41,9 +41,14 @@ awful.layout.layouts = {
 }
 
 awful.screen.connect_for_each_screen(function(s)
-    local tagTable = {' 1 ',' 2 ',' 3 ',' 4 ',' 5 ',' 6 ',' 7 ',' 8 ',' 9 '}
+    local tagTable = {' ● ',' ● ',' ● ',' ● ',' ● ',' ● ',' ● ',' ● ',' ● '}
     awful.tag(tagTable, s, awful.layout.layouts[1])
 end)
+
+-- Function to show notification
+local function show_alacritty_notification()
+    naughty.notify({ title = "System Notifications", text = "Alacritty launched!", timeout = 1 })
+end
 
 awful.rules.rules = {
 
@@ -59,6 +64,14 @@ awful.rules.rules = {
                    }
     },
 
+--        {
+--        --rule = { class = "Alacritty", name = "vim" },
+--        rule = { class = "Alacritty"},
+--        callback = function(c)
+--            show_alacritty_notification()
+--        end
+--    },
+--
 }
 
 -- Enable sloppy focus
@@ -102,7 +115,7 @@ local icon_paths = {
     Pavucontrol = "/home/telmo/.config/awesome/icons/png/pavucontrol.png",
     Lxappearance = "/home/telmo/.config/awesome/icons/png/lxappearance.png",
     ["nvidia-settings"] = "/home/telmo/.config/awesome/icons/png/nvidia.png",
-    Steam = "/home/telmo/.config/awesome/icons/png/steam.png",
+    steam = "/home/telmo/.config/awesome/icons/png/steam.png",
     Nemo = "/home/telmo/.config/awesome/icons/png/nemo.png",
     qbittorrent = "/home/telmo/.config/awesome/icons/png/qbittorrent.png",
     mpv = "/home/telmo/.config/awesome/icons/png/mpv.png",
